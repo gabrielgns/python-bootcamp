@@ -1,4 +1,4 @@
-import random
+import random   
 
 def display_board(board):
     print('\n'*100)
@@ -49,69 +49,15 @@ def full_board_check(board):
 
 def player_choice(board):
     position = 0
-    while position not  in [1,2,3,4,5,6,7,8,9] or not space_check(board, position):
-        position = int(input('Choose a position: (1-9) '))
+    while position not in range(1,10) or not space_check(board, position):
+        try:
+            position = int(input('Choose a position: (1-9) '))
+        except:
+            print("Only numbers")
+        
     return position
 
 def replay():
-    choice = input('Play again? Enter Yes or No')
-
-    return choice == 'Yes'
-
-print('Welcome to Tic TAC TOE')
-
-while True:
-    the_board = [' ']*10
-    player1_marker, player2_marker = player_input()
-
-    turn = choose_first()
-    print(turn + ' will go first')
-
-    play_game = input('Ready to play? y or n?')
-
-    if play_game == 'y':
-        game_on = True
-    else:
-        game_on = False
-
-    while game_on:
-        if turn == 'Player 1':
-            display_board(the_board)
-
-            position = player_choice(the_board)
-            place_marker(the_board, player1_marker, position)
-
-            if(win_check(the_board,player1_marker)):
-                display_board(the_board)
-                print('PLAYER 1 HAS WON!!!')
-                game_on = False
-            else:
-                if full_board_check(the_board):
-                    display_board(the_board)
-                    print('TIE GAME!')
-                    game_on = False
-                else:
-                    turn = 'Player 2'
-       
-        else:
-            if turn == 'Player 2':
-                display_board(the_board)
-
-            position = player_choice(the_board)
-            place_marker(the_board, player2_marker, position)
-
-            if(win_check(the_board,player2_marker)):
-                display_board(the_board)
-                print('PLAYER 2 HAS WON!!!')
-                game_on = False
-            else:
-                if full_board_check(the_board):
-                    display_board(the_board)
-                    print('TIE GAME!')
-                    game_on = False
-                else:
-                    turn = 'Player 1'
-            
-
-    if not replay():
-        break
+    choice = input('Play again? Enter Yes or No => ').lower()
+    
+    return choice == 'yes'
